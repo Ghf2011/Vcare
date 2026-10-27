@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="fontawsome/css/all.min.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar main-sidebar">
+      <div class="brand">
+        <img src="Vcare.png" alt="Logo VCare" class="brand-logo-img" />
+        <span><strong>VCare</strong><small>Catatan kendaraan</small></span>
+      </div>
+      <p class="nav-title">Menu utama</p>
+      <nav class="nav-list">
+        <a href="dashboard.html" class="nav-button active"><i class="fa-solid fa-house"></i>Dashboard</a>
+        <a href="kendaraan.html" class="nav-button"><i class="fa-solid fa-warehouse"></i></i>Garasi</a>
+        <a href="jadwal_servis.html" class="nav-button"><i class="fa-solid fa-calendar"></i>Jadwal Servis</a>
+        <a href="riwayat.html" class="nav-button"><i class="fa-solid fa-clock-rotate-left"></i>Riwayat Servis</a>
+        <a href="rekap_biaya.html" class="nav-button"><i class="fa-solid fa-file-invoice-dollar"></i>Rekap Biaya</a>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+            <span class="date-label" id="dateLabel">HARI INI</span>
+            <h1 id="welcomeName">Selamat datang</h1>
+        </div>
+        <div class="top-actions">
+        <!-- Tombol Notifikasi Pintar -->
+            <button class="circle-button" id="notifBtn" aria-label="Notifikasi">
+            <i class="fa-solid fa-bell"></i>
+            <span class="badge" id="notifBadge" style="display:none;">!</span>
+            </button>
+<!-- Profil Kanan Atas (Tautkan ke Pengaturan) -->
+            <a href="pengaturan.html" class="profile-button" style="text-decoration:none;">
+                  <div class="avatar" id="userAvatar">A</div>
+                <span id="userNameTop">User</span>
+            </a>
+        <!-- Tombol Keluar di Atas Kanan -->
+            <button class="secondary-btn" id="logoutBtn" style="padding: 6px 12px; font-size: 12px; height: 36px;">
+            <i class="fa-solid fa-right-from-bracket"></i>Keluar</button>
+        </div>
+      </header>
+
+      <!-- Toolbar Pencarian & Tombol Tambah -->
+      <div class="toolbar">
+        <label class="search-box"><i class="fa-solid fa-magnifying-glass"></i>
+          <input id="searchInput" placeholder="Cari kendaraan atau nomor polisi..." />
+        </label>
+      
+      </div>
+
+      <!-- Statistik Grid -->
+      <section class="stats-grid">
+        <article class="stat-card">
+          <span class="stat-icon"><i class="fa-solid fa-car"></i></span>
+          <div><small>Total kendaraan</small><strong id="statTotalVehicles">0</strong><small>Aktif tercatat</small></div>
+        </article>
+        <article class="stat-card">
+          <span class="stat-icon"><i class="fa-solid fa-calendar-days"></i></span>
+          <div><small>Servis berikutnya</small><strong id="statNextService">Belum ada</strong><small id="statNextServiceType">Buat jadwal baru</small></div>
+        </article>
+        <article class="stat-card">
+          <span class="stat-icon"><i class="fa-solid fa-wallet"></i></span>
+          <div><small>Total pengeluaran</small><strong id="statTotalCost">Rp 0</strong><small>Seluruh riwayat</small></div>
+        </article>
+      </section>
+
+      <div class="section-head">
+        <div><p class="eyebrow">GARASI SAYA</p><h2>Kendaraan & servis terakhir</h2></div>
+        
+      </div>
+
+      <!-- Container Ringkasan (Read-Only) -->
+      <section id="dashboardVehicleContainer" class="card-grid">
+        <!-- Diisi otomatis oleh script.js -->
+      </section>
+
+      </section>
+    </main>
+  </div>
+
+  <!-- BAR NAVIGASI BAWAH KHUSUS HP -->
+  <aside class="mobile-bottom-nav">
+    <a href="dashboard.html" class="nav-item active">
+      <i class="fa-solid fa-house"></i>
+      <span>Dashboard</span>
+    </a>
+    <button id="mobileMenuBtn" class="nav-item active " style="background:none; border:none; cursor:pointer;">
+      <i class="fa-solid fa-bars"></i>
+      <span>Menu</span>
+    </button>
+  </aside>
+
+  <!-- POP-UP MENU LAINNYA -->
+<div id="mobileMenuPopup" class="mobile-menu-popup" style="display: none;">
+  <div class="popup-content">
+    <div class="popup-handle"></div>
+    <div class="popup-header">
+      <h3>Menu Navigasi</h3>
+      <button id="closePopupBtn" class="popup-close-btn active"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <ul class="popup-list">
+      <li><a href="kendaraan.html" class="popup-link"><i class="fa-solid fa-car"></i> Garasi</a></li>
+      <li><a href="jadwal_servis.html" class="popup-link"><i class="fa-solid fa-calendar-days"></i> Jadwal Servis</a></li>
+      <li><a href="riwayat.html" class="popup-link"><i class="fa-solid fa-clock-rotate-left"></i> Riwayat Servis</a></li>
+      <li><a href="rekap_biaya.html" class="popup-link"><i class="fa-solid fa-wallet"></i> Rekap Biaya</a></li>
+  </div>
+</div>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div id="toast" class="toast"></div>
+  <script src="script.js"></script>
+</body>
+</html>

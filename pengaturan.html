@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pengaturan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="fontawsome/css/all.min.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar main-sidebar">
+      <div class="brand">
+        <img src="Vcare.png" alt="Logo VCare" class="brand-logo-img" />
+        <span><strong>VCare</strong><small>Catatan kendaraan</small></span>
+      </div>
+      <p class="nav-title">Menu utama</p>
+      
+      <!-- SIDEBAR ATAS (DIATUR OLEH SCRIPT.JS BERDASARKAN ROLE) -->
+      <nav class="nav-list">
+        <a href="dashboard.html" class="nav-button"><i class="fa-solid fa-house"></i>Dashboard</a>
+        <a href="kendaraan.html" class="nav-button"><i class="fa-solid fa-warehouse"></i></i>Garasi</a>
+        <a href="jadwal_servis.html" class="nav-button"><i class="fa-solid fa-calendar"></i>Jadwal Servis</a>
+        <a href="riwayat.html" class="nav-button"><i class="fa-solid fa-clock-rotate-left"></i>Riwayat Servis</a>
+        <a href="rekap_biaya.html" class="nav-button"><i class="fa-solid fa-file-invoice-dollar"></i>Rekap Biaya</a>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <span class="date-label">PREFERENSI</span>
+          <h1>Profil & Tampilan</h1>
+        </div>
+        <div class="top-actions">
+        <!-- Tombol Notifikasi Pintar -->
+            <button class="circle-button" id="notifBtn" aria-label="Notifikasi">
+            <i class="fa-solid fa-bell"></i>
+            <span class="badge" id="notifBadge" style="display:none;">!</span>
+            </button>
+<!-- Profil Kanan Atas (Tautkan ke Pengaturan) -->
+            <a href="pengaturan.html" class="profile-button" style="text-decoration:none;">
+                  <div class="avatar" id="userAvatar">A</div>
+                <span id="userNameTop">User</span>
+            </a>
+        <!-- Tombol Keluar di Atas Kanan -->
+            <button class="secondary-btn" id="logoutBtn" style="padding: 6px 12px; font-size: 12px; height: 36px;">
+            <i class="fa-solid fa-right-from-bracket"></i>Keluar</button>
+        </div>
+      </header>
+
+      <!-- TAMPILAN UTAMA SAMA SEPERTI USER (FORM PROFIL, TEMA, BACKUP, RESET) -->
+      <section class="two-column">
+        <article class="panel">
+          <p class="eyebrow">PREFERENSI</p><h2>Profil Pengguna</h2>
+          <form id="profileForm" style="margin-top:22px">
+            <label class="field">Nama pengguna<input id="profName" type="text" required /></label>
+            <div class="form-grid">
+              <label class="field">Email<input id="profEmail" type="email" required /></label>
+              <label class="field">Nomor telepon<input id="profPhone" type="text" required /></label>
+            </div>
+            <p style="margin-top:16px;"><strong>Tema website</strong></p>
+            <div class="theme-options">
+              <button type="button" class="theme-option" id="themeLightBtn">Terang</button>
+              <button type="button" class="theme-option" id="themeDarkBtn">Gelap</button>
+            </div>
+            <button class="primary-btn" type="submit" style="margin-top:16px;">Simpan profil & pengaturan</button>
+          </form>
+        </article>
+
+        <div>
+          <article class="panel">
+            <h3>Data & cadangan</h3>
+            <p class="muted">Unduh seluruh data VCare dalam format JSON.</p>
+            <button class="secondary-btn full-btn" id="exportDataBtn">Unduh cadangan</button>
+          </article>
+          <article class="panel" style="margin-top:16px">
+            <h3 style="color:var(--danger)">Reset data</h3>
+            <p class="muted">Pulihkan seluruh data ke contoh awal.</p>
+            <button class="danger-btn full-btn" id="resetDataBtn">Pulihkan data contoh</button>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- BAR NAVIGASI BAWAH KHUSUS HP -->
+  <aside class="mobile-bottom-nav">
+    <a href="dashboard.html" class="nav-item">
+      <i class="fa-solid fa-house"></i>
+      <span>Dashboard</span>
+    </a>
+    <button id="mobileMenuBtn" class="nav-item" style="background:none; border:none; cursor:pointer;">
+      <i class="fa-solid fa-bars"></i>
+      <span>Menu</span>
+    </button>
+  </aside>
+
+  <!-- POP-UP MENU LAINNYA -->
+<div id="mobileMenuPopup" class="mobile-menu-popup" style="display: none;">
+  <div class="popup-content">
+    <div class="popup-handle"></div>
+    <div class="popup-header">
+      <h3>Menu Navigasi</h3>
+      <button id="closePopupBtn" class="popup-close-btn"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <ul class="popup-list">
+      <li><a href="kendaraan.html" class="popup-link"><i class="fa-solid fa-car"></i> Garasi</a></li>
+      <li><a href="jadwal_servis.html" class="popup-link"><i class="fa-solid fa-calendar-days"></i> Jadwal Servis</a></li>
+      <li><a href="riwayat.html" class="popup-link"><i class="fa-solid fa-clock-rotate-left"></i> Riwayat Servis</a></li>
+      <li><a href="rekap_biaya.html" class="popup-link"><i class="fa-solid fa-wallet"></i> Rekap Biaya</a></li>
+    </ul>
+  </div>
+</div>
+
+  <div id="toast" class="toast"></div>
+  <script src="script.js"></script>
+</body>
+</html>

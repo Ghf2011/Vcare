@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jadwal Servis</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="fontawsome/css/all.min.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar main-sidebar">
+      <div class="brand">
+        <img src="Vcare.png" alt="Logo VCare" class="brand-logo-img" />
+        <span><strong>VCare</strong><small>Catatan kendaraan</small></span>
+      </div>
+      <p class="nav-title">Menu utama</p>
+      <nav class="nav-list">
+        <a href="dashboard.html" class="nav-button "><i class="fa-solid fa-house"></i>Dashboard</a>
+        <a href="kendaraan.html" class="nav-button"><i class="fa-solid fa-warehouse"></i>Garasi</a>
+        <a href="jadwal_servis.html" class="nav-button active"><i class="fa-solid fa-calendar"></i>Jadwal Servis</a>
+        <a href="riwayat.html" class="nav-button"><i class="fa-solid fa-clock-rotate-left"></i>Riwayat Servis</a>
+        <a href="rekap_biaya.html" class="nav-button"><i class="fa-solid fa-file-invoice-dollar"></i>Rekap Biaya</a>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <span class="date-label">AGENDA PERAWATAN</span>
+          <h1>Jadwal Servis</h1>
+        </div>
+        <div class="top-actions">
+          <button class="circle-button" id="notifBtn" aria-label="Notifikasi">
+            <i class="fa-solid fa-bell"></i>
+            <span class="badge" id="notifBadge" style="display:none;">!</span>
+          </button>
+          <!--Tombol profile-->
+          <a href="pengaturan.html" class="profile-button" style="text-decoration:none;">
+            <div class="avatar" id="userAvatar">A</div>
+            <span id="userNameTop">User</span>
+          </a>
+          <!-- Tombol Keluar di Atas Kanan -->
+          <button class="secondary-btn" id="logoutBtn" style="padding: 6px 12px; font-size: 12px; height: 36px;">
+            <i class="fa-solid fa-right-from-bracket"></i>Keluar</button>
+        </div>
+      </header>
+
+      <div class="toolbar">
+        <button class="primary-btn" id="openAddServiceModalBtn">+ Jadwalkan servis</button>
+      </div>
+
+      <section class="two-column">
+        <div class="calendar-panel">
+          <p class="eyebrow" style="color:#afcdc1">JADWAL SERVIS</p>
+          <h2>Jangan lewatkan perawatan</h2>
+          <div id="scheduleContainer" style="margin-top:16px;">
+            <!-- Card jadwal dimasukkan oleh script.js -->
+          </div>
+        </div>
+        <article class="panel">
+          <div class="stat-icon" style="margin-bottom:12px;">TP</div>
+          <h3>Tips perawatan</h3>
+          <p class="muted">Cek tekanan ban setiap dua minggu dan pastikan level oli sesuai batas aman sebelum perjalanan jauh.</p>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <!-- POP-UP MODAL CATAT/TAMBAH JADWAL SERVIS -->
+  <div id="serviceModal" class="modal-backdrop" style="display: none;">
+    <div class="modal">
+      <div class="modal-head">
+        <div><p class="eyebrow">VCARE</p><h2>Catat / Jadwalkan Servis</h2></div>
+        <button class="icon-button" id="closeServiceModalBtn">X</button>
+      </div>
+      <form id="serviceForm">
+        <div class="form-grid">
+          <label class="field">Kendaraan
+            <select id="sVehicleId" required></select>
+          </label>
+          <label class="field">Jenis servis
+            <input id="sServiceType" type="text" placeholder="Contoh: Ganti Oli / Servis Berkala" required />
+          </label>
+        </div>
+        <div class="form-grid">
+          <label class="field">Tanggal<input id="sDate" type="date" required /></label>
+          <label class="field">Kilometer<input id="sOdometer" type="number" min="0" required placeholder="15000" /></label>
+        </div>
+        <div class="form-grid">
+          <label class="field">Nama bengkel<input id="sWorkshop" type="text" placeholder="AHASS Batam Center" required /></label>
+          <label class="field">Biaya (Estimasi)<input id="sCost" type="number" min="0" placeholder="65000" required /></label>
+        </div>
+        <label class="field">Catatan<textarea id="sNotes" placeholder="Catatan tambahan..."></textarea></label>
+        <button class="primary-btn full-btn" type="submit">Jadwalkan Servis</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- POP-UP MODAL EDIT JADWAL SERVIS (USER) -->
+  <div id="userEditServiceModal" class="modal-backdrop" style="display: none;">
+    <div class="modal">
+      <div class="modal-head">
+        <div><p class="eyebrow">PEMELIHARAAN</p><h2>Edit Jadwal Servis</h2></div>
+        <button class="icon-button" id="closeUserEditServiceModalBtn">X</button>
+      </div>
+      <form id="userEditServiceForm">
+        <input type="hidden" id="uEditServiceId" />
+        <div class="form-grid">
+          <label class="field">Kendaraan
+            <select id="uEditVehicleId" required></select>
+          </label>
+          <label class="field">Jenis servis
+            <input id="uEditServiceType" type="text" placeholder="Contoh: Ganti Oli" required />
+          </label>
+        </div>
+        <div class="form-grid">
+          <label class="field">Tanggal<input id="uEditDate" type="date" required /></label>
+          <label class="field">Kilometer<input id="uEditOdometer" type="number" min="0" placeholder="15000" /></label>
+        </div>
+        <div class="form-grid">
+          <label class="field">Nama bengkel<input id="uEditWorkshop" type="text" placeholder="AHASS Batam Center" required /></label>
+          <label class="field">Biaya (estimasi)<input id="uEditCost" type="number" min="0" placeholder="65000" required /></label>
+        </div>
+        <label class="field">Catatan<textarea id="uEditNotes" placeholder="Catatan tambahan..."></textarea></label>
+        <button class="primary-btn full-btn" type="submit">Simpan Perubahan</button>
+      </form>
+    </div>
+  </div>
+
+<!-- BAR NAVIGASI BAWAH KHUSUS HP -->
+  <aside class="mobile-bottom-nav">
+    <a href="dashboard.html" class="nav-item">
+      <i class="fa-solid fa-house"></i>
+      <span>Dashboard</span>
+    </a>
+    <button id="mobileMenuBtn" class="nav-item" style="background:none; border:none; cursor:pointer;">
+      <i class="fa-solid fa-bars"></i>
+      <span>Menu</span>
+    </button>
+  </aside>
+
+ <!-- POP-UP MENU LAINNYA -->
+<div id="mobileMenuPopup" class="mobile-menu-popup" style="display: none;">
+  <div class="popup-content">
+    <div class="popup-handle"></div>
+    <div class="popup-header">
+      <h3>Menu Navigasi</h3>
+      <button id="closePopupBtn" class="popup-close-btn"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <ul class="popup-list">
+      <li><a href="kendaraan.html" class="popup-link"><i class="fa-solid fa-car"></i> Garasi</a></li>
+      <li><a href="jadwal_servis.html" class="popup-link"><i class="fa-solid fa-calendar-days"></i> Jadwal Servis</a></li>
+      <li><a href="riwayat.html" class="popup-link"><i class="fa-solid fa-clock-rotate-left"></i> Riwayat Servis</a></li>
+      <li><a href="rekap_biaya.html" class="popup-link"><i class="fa-solid fa-wallet"></i> Rekap Biaya</a></li>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div id="toast" class="toast"></div>
+  <script src="script.js"></script>
+</body>
+</html>

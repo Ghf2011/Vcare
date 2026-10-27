@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VCare - Masuk</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="fontawsome/css/all.min.css">
+</head>
+<body>
+  <main class="login">
+    <section class="login-intro">
+      <div class="login-brand">
+        <img src="Vcare.png" alt="Logo VCare" class="brand-logo-img" />
+        <div><strong>VCare</strong><br><small>Vehicle care, made simple</small></div>
+      </div>
+      <div class="login-copy">
+        <p class="eyebrow">Kendaraan terawat, perjalanan tenang</p>
+        <h1>Semua riwayat kendaraan Anda dalam satu tempat.</h1>
+        <p>Catat servis, pantau biaya, dan kelola jadwal perawatan dengan lebih rapi melalui VCare.</p>
+      </div>
+    </section>
+
+    <section class="login-panel">
+      <div class="login-card">
+        <h2 id="formTitle">Masuk ke akun</h2>
+        <p id="formSubTitle">Silakan masuk menggunakan akun demo.</p>
+        
+        <form id="authForm">
+          <div id="registerFields" style="display: none;">
+            <label class="field">Nama Lengkap
+              <input id="registerName" type="text" placeholder="Nama Anda" />
+            </label>
+            <label class="field">Nomor Telepon
+              <input id="registerPhone" type="text" placeholder="08xxxxxxxxxx" />
+            </label>
+          </div>
+          <label class="field">Email
+            <input id="loginEmail" type="email" placeholder="email@gmail.com" required />
+          </label>
+          <label class="field">Kata sandi
+            <input id="loginPassword" type="password" placeholder="••••••••" required />
+          </label>
+          <p id="loginError" class="muted" style="color:var(--danger)"></p>
+          <button class="primary-btn full-btn" type="submit" id="submitBtn">Masuk</button>
+        </form>
+
+        <div style="margin-top: 12px; text-align: center; display: flex; flex-direction: column; gap: 8px;">
+        <!-- Tombol ganti mode Login/Register -->
+          <button id="toggleModeBtn" class="secondary-btn full-btn" type="button" style="background:transparent; border:none; color:var(--brand); cursor:pointer;">
+          Belum punya akun? Daftar di sini
+          </button>
+  
+        <!-- Tombol Lupa Kata Sandi (Khusus tampilan Login) -->
+          <button id="forgotPasswordBtn" type="button" style="background:transparent; border:none; color:var(--muted); font-size: 12px; cursor:pointer;">
+            Lupa kata sandi?
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+ <!-- MODAL LUPA SANDI -->
+  <div id="forgotModal" class="modal-backdrop" style="display: none;">
+    <div class="modal">
+      <div class="modal-head">
+        <div><p class="eyebrow">VCARE</p><h2>Lupa Kata Sandi</h2></div>
+
+        <button class="icon-button" id="closeForgotModalBtn">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <form id="forgotForm">
+        <label class="field">Masukkan Email Terdaftar
+          <input id="forgotEmail" type="email" placeholder="email@gmail.com" required />
+        </label>
+        <label class="field">Kata Sandi Baru
+          <input id="forgotNewPass" type="password" placeholder="••••••••" required />
+        </label>
+        <button class="primary-btn full-btn" type="submit">Ubah Kata Sandi</button>
+      </form>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <div id="toast" class="toast"></div>
+  <script src="script.js"></script>
+</body>
+</html>
